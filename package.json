@@ -27,7 +27,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*": "npm run lint"
+    "*": "eslint"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
