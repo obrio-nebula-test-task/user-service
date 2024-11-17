@@ -15,8 +15,10 @@ export class UserRepository {
 
   async create(createUserDto: CreateUserDto): Promise<UserEntity> {
     const { firstName, lastName } = createUserDto;
-    await this.knex('users')
-      .insert({ first_name: firstName, last_name: lastName });
+    await this.knex('users').insert({
+      first_name: firstName,
+      last_name: lastName,
+    });
     return createUserDto;
   }
 }

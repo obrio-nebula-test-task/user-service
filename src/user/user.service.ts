@@ -11,6 +11,6 @@ export class UserService {
   }
 
   async addUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-    return this.userRepository.create(createUserDto)
+    return this.userRepository.create(createUserDto);
   }
 }

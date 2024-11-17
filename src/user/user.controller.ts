@@ -13,6 +13,6 @@ export class UserController {
 
   @Post()
   user(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
-    return this.userService.addUser(createUserDto)
+    return this.userService.addUser(createUserDto);
   }
 }
