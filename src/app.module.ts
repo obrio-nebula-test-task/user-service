@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { KnexModule } from 'nest-knexjs';
 import { ConfigModule } from '@nestjs/config';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { KnexModule } from 'nest-knexjs';
+import { AppController } from './app.controller';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
@@ -12,6 +13,21 @@ import { UserRepository } from './user/user.repository';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ClientsModule.register([
+      {
+        name: 'RABBITMQ_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: [
+            `amqp://${process.env.RABBITMQ_USERNAME}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`,
+          ],
+          queue: 'push_notification',
+          queueOptions: {
+            durable: true,
+          },
+        },
+      },
+    ]),
     KnexModule.forRootAsync({
       useFactory: () => ({
         config: {
