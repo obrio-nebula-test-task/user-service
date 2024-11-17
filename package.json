@@ -24,7 +24,13 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prepare": "husky"
+    "prepare": "husky",
+    "migrate:make": "knex migrate:make",
+    "migrate:latest": "knex migrate:latest",
+    "migrate:rollback": "knex migrate:rollback",
+    "migrate:up": "knex migrate:up",
+    "seed:make": "knex seed:make",
+    "seed:run": "knex seed:run"
   },
   "lint-staged": {
     "*": "eslint"
@@ -34,6 +40,7 @@
     "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "dotenv": "^16.4.5",
     "knex": "^3.1.0",
     "nest-knexjs": "^0.0.24",
     "pg": "^8.13.1",

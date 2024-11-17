@@ -1,4 +1,5 @@
 // Update with your config settings.
+import 'dotenv/config'
 
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
@@ -13,11 +14,13 @@ module.exports = {
       user: process.env['POSTGRES_USER'],
       database: process.env['POSTGRES_DB'],
       password: process.env['POSTGRES_PASSWORD'],
-      ssl: process.env['DB_SSL'] ? { rejectUnauthorized: false } : false,
     },
     migrations: {
       directory: './src/database/migrations',
       tableName: 'obrio_migrations',
+    },
+    seeds: {
+      directory: './src/database/seeds',
     },
   },
 
@@ -30,11 +33,13 @@ module.exports = {
       user: process.env['POSTGRES_USER'],
       database: process.env['POSTGRES_DB'],
       password: process.env['POSTGRES_PASSWORD'],
-      ssl: process.env['DB_SSL'] ? { rejectUnauthorized: false } : false,
     },
     migrations: {
       directory: './src/database/migrations',
       tableName: 'obrio_migrations',
+    },
+    seeds: {
+      directory: './src/database/seeds',
     },
   },
 
@@ -47,11 +52,13 @@ module.exports = {
       user: process.env['POSTGRES_USER'],
       database: process.env['POSTGRES_DB'],
       password: process.env['POSTGRES_PASSWORD'],
-      ssl: process.env['DB_SSL'] ? { rejectUnauthorized: false } : false,
     },
     migrations: {
       directory: './src/database/migrations',
       tableName: 'obrio_migrations',
+    },
+    seeds: {
+      directory: './src/database/seeds',
     },
   }
 };
