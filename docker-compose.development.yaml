@@ -21,3 +21,5 @@ services:
     ports:
       - "${RABBITMQ_PORT}:5672"
       - "${RABBITMQ_WEB_INTERFACE_PORT}:15672"
+    volumes:
+      - ~/apps/rabbitmq:/var/lib/rabbitmq/mnesia/
