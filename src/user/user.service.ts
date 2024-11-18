@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientProxy, RmqRecordBuilder } from '@nestjs/microservices';
 import { UserRepository } from './user.repository';
 import { CreateUserDto, UserEntity } from './types';
 
@@ -16,7 +16,16 @@ export class UserService {
 
   async addUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const result = await this.userRepository.create(createUserDto);
-    this.rabbitMQClient.emit('pattern', createUserDto);
+
+    const record = new RmqRecordBuilder(result)
+      .setOptions({
+        headers: {
+          'x-delay': process.env.RABBTIMQ_MESSAGE_DELAY,
+        },
+      })
+      .build();
+    this.rabbitMQClient.emit('pattern', record);
+    // this.rabbitMQClient.send()
     return result;
   }
 }

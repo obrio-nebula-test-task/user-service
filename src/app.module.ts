@@ -21,7 +21,7 @@ import { UserRepository } from './user/user.repository';
           urls: [
             `amqp://${process.env.RABBITMQ_USERNAME}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}:${process.env.RABBITMQ_PORT}`,
           ],
-          queue: 'push_notification',
+          queue: process.env.RABBTIMQ_QUEUE_NAME,
           queueOptions: {
             durable: true,
           },
