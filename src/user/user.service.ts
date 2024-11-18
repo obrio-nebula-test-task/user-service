@@ -25,7 +25,6 @@ export class UserService {
       })
       .build();
     this.rabbitMQClient.emit('pattern', record);
-    // this.rabbitMQClient.send()
     return result;
   }
 }
