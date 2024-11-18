@@ -16,13 +16,7 @@ export class UserService {
 
   async addUser(createUserDto: CreateUserDto): Promise<UserEntity> {
     const result = await this.userRepository.create(createUserDto);
-
     const record = new RmqRecordBuilder(result)
-      .setOptions({
-        headers: {
-          'x-delay': process.env.RABBTIMQ_MESSAGE_DELAY,
-        },
-      })
       .build();
     this.rabbitMQClient.emit('pattern', record);
     return result;
